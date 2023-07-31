@@ -25,7 +25,26 @@ func CalculateMethod(ctx context.Context, c *app.RequestContext) {
 		return
 	}
 
-	resp := new(calculate.CalculateResponse)
+	clientPool := global.ClientPool{}
+	calculateClient, err := clientPool.GetClient("CalculateService")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	requestRpc := &calculate.CalculateRequest{
+		Operand1: req.Operand1,
+		Operand2: req.Operand2,
+	}
+
+	var responseRpc calculate.CalculateResponse
+	err = global.SendRpcRequest(ctx, calculateClient, "calculateMethod", requestRpc, &responseRpc)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	resp := &calculate.CalculateResponse{
+		Outcome: responseRpc.Outcome,
+	}
 
 	c.JSON(consts.StatusOK, resp)
 }
@@ -41,7 +60,25 @@ func GreetingMethod(ctx context.Context, c *app.RequestContext) {
 		return
 	}
 
-	resp := new(greeting.GreetingResponse)
+	clientPool := global.ClientPool{}
+	greetingClient, err := clientPool.GetClient("GreetingService")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	requestRpc := &greeting.GreetingRequest{
+		Name: req.Name,
+	}
+
+	var responseRpc greeting.GreetingResponse
+	err = global.SendRpcRequest(ctx, greetingClient, "greetingMethod", requestRpc, &responseRpc)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	resp := &greeting.GreetingResponse{
+		ResponseBody: responseRpc.ResponseBody,
+	}
 
 	c.JSON(consts.StatusOK, resp)
 }
@@ -68,7 +105,7 @@ func ReverseMethod(ctx context.Context, c *app.RequestContext) {
 	}
 
 	var responseRpc reverse.ReverseResponse
-	err = global.SendRpcRequest(ctx, reverseClient, "ReverseMethod", requestRpc, &responseRpc)
+	err = global.SendRpcRequest(ctx, reverseClient, "reverseMethod", requestRpc, &responseRpc)
 	if err != nil {
 		log.Fatal(err)
 	}

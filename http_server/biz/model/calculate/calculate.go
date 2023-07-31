@@ -192,31 +192,19 @@ func (p *CalculateRequest) String() string {
 }
 
 type CalculateResponse struct {
-	Success bool   `thrift:"success,1" form:"success" json:"success"`
-	Message string `thrift:"message,2" form:"message" json:"message"`
-	Data    int32  `thrift:"data,3" form:"data" json:"data"`
+	Outcome int32 `thrift:"outcome,1" form:"outcome" json:"outcome"`
 }
 
 func NewCalculateResponse() *CalculateResponse {
 	return &CalculateResponse{}
 }
 
-func (p *CalculateResponse) GetSuccess() (v bool) {
-	return p.Success
-}
-
-func (p *CalculateResponse) GetMessage() (v string) {
-	return p.Message
-}
-
-func (p *CalculateResponse) GetData() (v int32) {
-	return p.Data
+func (p *CalculateResponse) GetOutcome() (v int32) {
+	return p.Outcome
 }
 
 var fieldIDToName_CalculateResponse = map[int16]string{
-	1: "success",
-	2: "message",
-	3: "data",
+	1: "outcome",
 }
 
 func (p *CalculateResponse) Read(iprot thrift.TProtocol) (err error) {
@@ -239,28 +227,8 @@ func (p *CalculateResponse) Read(iprot thrift.TProtocol) (err error) {
 
 		switch fieldId {
 		case 1:
-			if fieldTypeId == thrift.BOOL {
-				if err = p.ReadField1(iprot); err != nil {
-					goto ReadFieldError
-				}
-			} else {
-				if err = iprot.Skip(fieldTypeId); err != nil {
-					goto SkipFieldError
-				}
-			}
-		case 2:
-			if fieldTypeId == thrift.STRING {
-				if err = p.ReadField2(iprot); err != nil {
-					goto ReadFieldError
-				}
-			} else {
-				if err = iprot.Skip(fieldTypeId); err != nil {
-					goto SkipFieldError
-				}
-			}
-		case 3:
 			if fieldTypeId == thrift.I32 {
-				if err = p.ReadField3(iprot); err != nil {
+				if err = p.ReadField1(iprot); err != nil {
 					goto ReadFieldError
 				}
 			} else {
@@ -299,28 +267,10 @@ ReadStructEndError:
 }
 
 func (p *CalculateResponse) ReadField1(iprot thrift.TProtocol) error {
-	if v, err := iprot.ReadBool(); err != nil {
-		return err
-	} else {
-		p.Success = v
-	}
-	return nil
-}
-
-func (p *CalculateResponse) ReadField2(iprot thrift.TProtocol) error {
-	if v, err := iprot.ReadString(); err != nil {
-		return err
-	} else {
-		p.Message = v
-	}
-	return nil
-}
-
-func (p *CalculateResponse) ReadField3(iprot thrift.TProtocol) error {
 	if v, err := iprot.ReadI32(); err != nil {
 		return err
 	} else {
-		p.Data = v
+		p.Outcome = v
 	}
 	return nil
 }
@@ -333,14 +283,6 @@ func (p *CalculateResponse) Write(oprot thrift.TProtocol) (err error) {
 	if p != nil {
 		if err = p.writeField1(oprot); err != nil {
 			fieldId = 1
-			goto WriteFieldError
-		}
-		if err = p.writeField2(oprot); err != nil {
-			fieldId = 2
-			goto WriteFieldError
-		}
-		if err = p.writeField3(oprot); err != nil {
-			fieldId = 3
 			goto WriteFieldError
 		}
 
@@ -363,10 +305,10 @@ WriteStructEndError:
 }
 
 func (p *CalculateResponse) writeField1(oprot thrift.TProtocol) (err error) {
-	if err = oprot.WriteFieldBegin("success", thrift.BOOL, 1); err != nil {
+	if err = oprot.WriteFieldBegin("outcome", thrift.I32, 1); err != nil {
 		goto WriteFieldBeginError
 	}
-	if err := oprot.WriteBool(p.Success); err != nil {
+	if err := oprot.WriteI32(p.Outcome); err != nil {
 		return err
 	}
 	if err = oprot.WriteFieldEnd(); err != nil {
@@ -377,40 +319,6 @@ WriteFieldBeginError:
 	return thrift.PrependError(fmt.Sprintf("%T write field 1 begin error: ", p), err)
 WriteFieldEndError:
 	return thrift.PrependError(fmt.Sprintf("%T write field 1 end error: ", p), err)
-}
-
-func (p *CalculateResponse) writeField2(oprot thrift.TProtocol) (err error) {
-	if err = oprot.WriteFieldBegin("message", thrift.STRING, 2); err != nil {
-		goto WriteFieldBeginError
-	}
-	if err := oprot.WriteString(p.Message); err != nil {
-		return err
-	}
-	if err = oprot.WriteFieldEnd(); err != nil {
-		goto WriteFieldEndError
-	}
-	return nil
-WriteFieldBeginError:
-	return thrift.PrependError(fmt.Sprintf("%T write field 2 begin error: ", p), err)
-WriteFieldEndError:
-	return thrift.PrependError(fmt.Sprintf("%T write field 2 end error: ", p), err)
-}
-
-func (p *CalculateResponse) writeField3(oprot thrift.TProtocol) (err error) {
-	if err = oprot.WriteFieldBegin("data", thrift.I32, 3); err != nil {
-		goto WriteFieldBeginError
-	}
-	if err := oprot.WriteI32(p.Data); err != nil {
-		return err
-	}
-	if err = oprot.WriteFieldEnd(); err != nil {
-		goto WriteFieldEndError
-	}
-	return nil
-WriteFieldBeginError:
-	return thrift.PrependError(fmt.Sprintf("%T write field 3 begin error: ", p), err)
-WriteFieldEndError:
-	return thrift.PrependError(fmt.Sprintf("%T write field 3 end error: ", p), err)
 }
 
 func (p *CalculateResponse) String() string {
