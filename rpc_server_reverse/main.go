@@ -19,7 +19,7 @@ func main() {
 		new(ReverseServiceImpl),
 		server.WithServerBasicInfo(&rpcinfo.EndpointBasicInfo{ServiceName: "ReverseService"}),
 		server.WithRegistry(r),
-		server.WithServiceAddr(&net.TCPAddr{Port: 9991}),
+		server.WithServiceAddr(&net.TCPAddr{Port: 9992}),
 	)
 
 	err = svr.Run()
