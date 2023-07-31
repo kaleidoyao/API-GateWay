@@ -9,7 +9,7 @@ import (
 )
 
 func BenchmarkCalculate(b *testing.B) {
-	url := "http://127.0.0.1:8088/reverse"
+	url := "http://127.0.0.1:8888/reverse"
 	jsonStr := `{"operand_1":1,"operand_2":2}`
 	for i := 0; i < b.N; i++ {
 		resp, err := http.Post(url, "application/json", bytes.NewBuffer([]byte(jsonStr)))
@@ -28,7 +28,7 @@ func BenchmarkCalculate(b *testing.B) {
 }
 
 func BenchmarkCalculateParallel(b *testing.B) {
-	url := "http://127.0.0.1:8088/reverse"
+	url := "http://127.0.0.1:8888/reverse"
 	jsonStr := `{"operand_1":1,"operand_2":2}`
 	runtime.GOMAXPROCS(8)
 	b.RunParallel(func(pb *testing.PB) {
