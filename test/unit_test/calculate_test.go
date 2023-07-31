@@ -9,9 +9,9 @@ import (
 )
 
 func Test_calculateCase1(t *testing.T) {
-	operand_1 := int32(0)
-	operand_2 := int32(0)
-	outcome := int32(0)
+	operand_1 := int32(1)
+	operand_2 := int32(2)
+	outcome := int32(3)
 	csi := new(handler.CalculateServiceImpl)
 	req := &calculate.CalculateRequest{
 		Operand_1: operand_1,
