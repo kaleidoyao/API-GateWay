@@ -3,7 +3,7 @@ package reverseservice
 
 import (
 	server "github.com/cloudwego/kitex/server"
-	reverse "github.com/kaleidoyao/rpc_server_reverse/kitex_gen/reverse"
+	reverse "github.com/kaleidoyao/API-GateWay/rpc_server_reverse/kitex_gen/reverse"
 )
 
 // NewServer creates a server.Server with the given handler and options.

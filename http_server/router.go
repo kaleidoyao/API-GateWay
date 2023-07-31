@@ -4,7 +4,7 @@ package main
 
 import (
 	"github.com/cloudwego/hertz/pkg/app/server"
-	handler "github.com/kaleidoyao/http_server/biz/handler"
+	handler "github.com/kaleidoyao/API-GateWay/http_server/biz/handler"
 )
 
 // customizeRegister registers customize routers.

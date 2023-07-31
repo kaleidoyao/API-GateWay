@@ -4,7 +4,7 @@ package gateway
 
 import (
 	"github.com/cloudwego/hertz/pkg/app/server"
-	gateway "github.com/kaleidoyao/http_server/biz/handler/gateway"
+	gateway "github.com/kaleidoyao/API-GateWay/http_server/biz/handler/gateway"
 )
 
 /*

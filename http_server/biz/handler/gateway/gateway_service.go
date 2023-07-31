@@ -4,12 +4,14 @@ package gateway
 
 import (
 	"context"
+	"github.com/kaleidoyao/API-GateWay/global"
+	"log"
 
 	"github.com/cloudwego/hertz/pkg/app"
 	"github.com/cloudwego/hertz/pkg/protocol/consts"
-	calculate "github.com/kaleidoyao/http_server/biz/model/calculate"
-	greeting "github.com/kaleidoyao/http_server/biz/model/greeting"
-	reverse "github.com/kaleidoyao/http_server/biz/model/reverse"
+	calculate "github.com/kaleidoyao/API-GateWay/http_server/biz/model/calculate"
+	greeting "github.com/kaleidoyao/API-GateWay/http_server/biz/model/greeting"
+	reverse "github.com/kaleidoyao/API-GateWay/http_server/biz/model/reverse"
 )
 
 // CalculateMethod .
@@ -55,7 +57,25 @@ func ReverseMethod(ctx context.Context, c *app.RequestContext) {
 		return
 	}
 
-	resp := new(reverse.ReverseResponse)
+	clientPool := global.ClientPool{}
+	reverseClient, err := clientPool.GetClient("ReverseService")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	requestRpc := &reverse.ReverseRequest{
+		InputString: req.InputString,
+	}
+
+	var responseRpc reverse.ReverseResponse
+	err = global.SendRpcRequest(ctx, reverseClient, "ReverseMethod", requestRpc, &responseRpc)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	resp := &reverse.ReverseResponse{
+		OutputString: responseRpc.OutputString,
+	}
 
 	c.JSON(consts.StatusOK, resp)
 }

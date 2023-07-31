@@ -6,7 +6,7 @@ import (
 	"context"
 	client "github.com/cloudwego/kitex/client"
 	kitex "github.com/cloudwego/kitex/pkg/serviceinfo"
-	reverse "github.com/kaleidoyao/rpc_server_reverse/kitex_gen/reverse"
+	reverse "github.com/kaleidoyao/API-GateWay/rpc_server_reverse/kitex_gen/reverse"
 )
 
 func serviceInfo() *kitex.ServiceInfo {

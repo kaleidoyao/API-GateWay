@@ -6,9 +6,9 @@ import (
 	"context"
 	"fmt"
 	"github.com/apache/thrift/lib/go/thrift"
-	"github.com/kaleidoyao/http_server/biz/model/calculate"
-	"github.com/kaleidoyao/http_server/biz/model/greeting"
-	"github.com/kaleidoyao/http_server/biz/model/reverse"
+	"github.com/kaleidoyao/API-GateWay/http_server/biz/model/calculate"
+	"github.com/kaleidoyao/API-GateWay/http_server/biz/model/greeting"
+	"github.com/kaleidoyao/API-GateWay/http_server/biz/model/reverse"
 )
 
 type GatewayService interface {

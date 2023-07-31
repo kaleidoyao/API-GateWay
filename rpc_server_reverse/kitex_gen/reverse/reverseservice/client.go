@@ -6,7 +6,7 @@ import (
 	"context"
 	client "github.com/cloudwego/kitex/client"
 	callopt "github.com/cloudwego/kitex/client/callopt"
-	reverse "github.com/kaleidoyao/rpc_server_reverse/kitex_gen/reverse"
+	reverse "github.com/kaleidoyao/API-GateWay/rpc_server_reverse/kitex_gen/reverse"
 )
 
 // Client is designed to provide IDL-compatible methods with call-option parameter for kitex framework.

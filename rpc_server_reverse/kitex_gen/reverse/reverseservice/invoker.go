@@ -4,7 +4,7 @@ package reverseservice
 
 import (
 	server "github.com/cloudwego/kitex/server"
-	reverse "github.com/kaleidoyao/rpc_server_reverse/kitex_gen/reverse"
+	reverse "github.com/kaleidoyao/API-GateWay/rpc_server_reverse/kitex_gen/reverse"
 )
 
 // NewInvoker creates a server.Invoker with the given handler and options.
